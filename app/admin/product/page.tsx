@@ -8,9 +8,6 @@ import ProductForm from "@components/ProductForm";
 const CreateProductForm = () => {
   const { data: session, status } = useSession();
   const router = useRouter();
-  if (status === "unauthenticated") {
-    return redirect("/");
-  }
 
   const [productData, setProductData] = useState({
     title: "",
@@ -40,6 +37,10 @@ const CreateProductForm = () => {
     }
     // Reset form fields
   };
+
+  if (status === "unauthenticated") {
+    return redirect("/");
+  }
 
   return (
     <div className="container mx-auto p-4">

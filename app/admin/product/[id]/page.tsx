@@ -15,9 +15,7 @@ type EditProductFormProps = {
 const EditProductForm = ({ params }: EditProductFormProps) => {
   const { data: sessions, status } = useSession();
   const router = useRouter();
-  if (status === "unauthenticated") {
-    return redirect("/");
-  }
+
   const [productData, setProductData] = useState({
     title: "",
     price: "",
@@ -34,7 +32,7 @@ const EditProductForm = ({ params }: EditProductFormProps) => {
       setProductData(data);
     }
     getProduct();
-  }, []);
+  }, [params.id]);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -64,6 +62,10 @@ const EditProductForm = ({ params }: EditProductFormProps) => {
       image: "",
     });
   };
+
+  if (status === "unauthenticated") {
+    return redirect("/");
+  }
 
   return (
     <div className="container mx-auto p-4">
